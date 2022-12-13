@@ -15,7 +15,7 @@ if not os.path.isdir("data"):
 if not os.path.exists("urls.json"):
     with open("urls.json", "w") as file:
         json.dump({"to_download": [],
-                    "already_downloaded": []}
+                    "already_downloaded": []}, file
                     )
 
 def download(verbose=False):
@@ -78,7 +78,7 @@ def download(verbose=False):
             print("List updated")
             print("...")
 
-    print(f"\n{count}/{initial_urls_number} URL(S) successfully downloaded\n")
+    print(f"{count}/{initial_urls_number} URL(S) successfully downloaded\n")
 
     if not_downloaded:
         n = '\n'
@@ -108,33 +108,33 @@ def add_link(url):
     print("Link added\n")
 
 
-equals = f"{40 * '='}"
+equals = f"{70 * '='}"
 
 if len(sys.argv) == 1:
     print(equals)
     print("    Please specify an argument")
     print(equals)
-    print("\n-d to download the current list\n\n-add [link] to add a new link to the list\n\n-v can be added with -d argument\n")
+    print("\n-d to download the current list\n\n-a [link] to add a new link to the list\n\n-v can be added with -d argument\n")
 
 elif len(sys.argv) > 3:
     print(equals)
     print("    Too much arguments")
     print(equals)
-    print("\n-d to download the current list\n\n-add [link] to add a new link to the list\n\n-v can be added with -d argument\n")
+    print("\n-d to download the current list\n\n-a [link] to add a new link to the list\n\n-v can be added with -d argument\n")
 
-elif len(sys.argv) > 1 and sys.argv[1] not in ["-d", "-add"]:
+elif len(sys.argv) > 1 and sys.argv[1] not in ["-d", "-a"]:
     print(equals)
     print("    Wrong argument. Please specify the correct one")
     print(equals)
-    print("\n-d to download the current list\n\n-add [link] to add a new link to the list\n\n-v can be added with -d argument\n")
+    print("\n-d to download the current list\n\n-a [link] to add a new link to the list\n\n-v can be added with -d argument\n")
 
-elif len(sys.argv) == 2 and sys.argv[1] == "-add":
+elif len(sys.argv) == 2 and sys.argv[1] == "-a":
     print(equals)
-    print("    You need to specify an URL with the -add argument\n")
+    print("    You need to specify an URL with the -a argument\n")
     print(equals)
 
 
-elif sys.argv[1] == "-add":
+elif sys.argv[1] == "-a":
     add_link(sys.argv[2])
 
 elif len(sys.argv) == 3 and sys.argv[1] == "-d" and sys.argv[2] == "-v":
