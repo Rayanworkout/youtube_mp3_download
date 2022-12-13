@@ -84,7 +84,7 @@ def download(verbose=False):
 
 
 def add_link(url):
-    if not re.match(r"^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$", url):
+    if not re.match(r'^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$', url):
         print("This is not a valid URL, try again")
         return
 
