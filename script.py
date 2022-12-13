@@ -25,12 +25,13 @@ def download(verbose=False):
         to_download = data["to_download"]
     
     initial_urls_number = len(to_download)
-    
-    if verbose:
-        print(f"{initial_urls_number} urls to download.")
+
     if not to_download:
         print("Nothing to download ...\n")
         exit()
+    
+    if verbose:
+        print(f"{initial_urls_number} urls to download.")
 
     count = 0
     not_downloaded = []
