@@ -8,14 +8,22 @@ from pytube import YouTube
 from tqdm import tqdm
 
 
-def download():
-    with open("wanted_musics.json") as file:
+if not os.path.exists("urls.json"):
+    with open("urls.json", "w") as file:
+        json.dump({"to_download": [],
+                    "already_downloaded": []}
+                    )
+
+def download(verbose=False):
+    with open("urls.json") as file:
         data = json.load(file)
         already_downloaded = data["already_downloaded"]
         to_download = data["to_download"]
     
     initial_urls_number = len(to_download)
-
+    
+    if verbose:
+        print(f"{initial_urls_number} urls to download.")
     if not to_download:
         print("Nothing to download ...\n")
         exit()
@@ -31,15 +39,16 @@ def download():
 
             yt = YouTube(url)
 
-            ##@ Extract audio with 160kbps quality from video
+            # Extract audio with 160kbps quality from video
             video = yt.streams.filter(abr='160kbps').last()
 
-            ##@ Downloadthe file
-            out_file = video.download(output_path="music_mp3")
+            # Downloadthe file
+            out_file = video.download(output_path="data")
             base, ext = os.path.splitext(out_file)
             new_file = Path(f'{base}.mp3')
             os.rename(out_file, new_file)
-            ##@ Check success of download
+
+            # Check success of download
             if new_file.exists():
                 count += 1
             else:
@@ -47,22 +56,31 @@ def download():
 
             to_download.remove(url)
             already_downloaded.append(url)
+        
+            if verbose:
+                print(f"\nSuccessfully downloaded {yt.title}\n")
 
-        with open("wanted_musics.json", "w") as out:
+
+        with open("urls.json", "w") as out:
             json.dump(
             {
                 "to_download": to_download,
                 "already_downloaded": already_downloaded
             }, out, indent=4)
+        
+        if verbose:
+            print("\nList updated\n")
 
-    print(f"\n{count}/{initial_urls_number} musics successfully downloaded.\n")
+    print(f"\n{count}/{initial_urls_number} urls successfully downloaded.\n")
 
     if not_downloaded:
         n = '\n'
-        print(f"{len(not_downloaded)} music(s) were not downloaded:\n{n.join(not_downloaded)}\n")
+        print(f"{len(not_downloaded)} url(s) were not downloaded:\n{n.join(not_downloaded)}\n")
+
+
 
 def add_link(url):
-    with open("wanted_musics.json", "r+") as file:
+    with open("urls.json", "r+") as file:
 
         data = json.load(file)
         
@@ -79,11 +97,14 @@ def add_link(url):
     print("\nLink added\n")
 
 
-if len(sys.argv) < 2:
-    print("Please specify an argument.\n\n-d to download the current list\n\n-add [link]")
-
-if sys.argv[1] == "-d":
-    download()
-
 if sys.argv[1] == "-add":
     add_link(sys.argv[2])
+
+elif len(sys.argv) == 1:
+    print("Please specify an argument.\n\n-d to download the current list\n\n-add [link]\n\n-v can be added with -d argument")
+
+elif sys.argv[1] == "-d" and sys.argv[2] == "-v":
+    download(verbose=True)
+
+elif sys.argv[1] == "-d":
+    download()
