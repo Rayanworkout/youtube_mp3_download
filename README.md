@@ -14,6 +14,7 @@ Can be used in commande line with these 2 arguments:
 - download your list with **python script.py -d**
 
 **ex:**
+
 **python3 script.py -add https://www.youtube.com/watch?v=rrzHAoA-oRI**
 
 **python3 script.py -d**
