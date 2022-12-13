@@ -31,7 +31,7 @@ def download(verbose=False):
         exit()
     
     if verbose:
-        print(f"{initial_urls_number} URLS to download.")
+        print(f"{initial_urls_number} URL(S) to download.")
 
     count = 0
     not_downloaded = []
@@ -75,10 +75,10 @@ def download(verbose=False):
             }, out, indent=4)
         
         if verbose:
-            print("List updated.")
+            print("List updated")
             print("...")
 
-    print(f"\n{count}/{initial_urls_number} URLS successfully downloaded.\n")
+    print(f"\n{count}/{initial_urls_number} URL(S) successfully downloaded\n")
 
     if not_downloaded:
         n = '\n'
@@ -130,7 +130,7 @@ elif len(sys.argv) > 1 and sys.argv[1] not in ["-d", "-add"]:
 
 elif len(sys.argv) == 2 and sys.argv[1] == "-add":
     print(equals)
-    print("    You need to specify an URL with the -add argument.\n")
+    print("    You need to specify an URL with the -add argument\n")
     print(equals)
 
 
