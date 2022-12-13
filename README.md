@@ -12,9 +12,10 @@ Can be used in commande line with these 2 arguments:
 - open a terminal in the script's folder
 - add one or many urls with the command **python script.py -add [url]**
 - download your list with **python script.py -d**
+- *-v* can be added along with *-d* argument in order to have a more verbose display
 
 **ex:**
 
 **python3 script.py -add https://www.youtube.com/watch?v=rrzHAoA-oRI**
 
-**python3 script.py -d**
+**python3 script.py -d -v**
