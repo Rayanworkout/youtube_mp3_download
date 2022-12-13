@@ -7,6 +7,7 @@ from pathlib import Path
 
 from pytube import YouTube
 
+print()
 
 if not os.path.isdir("data"):
     os.mkdir("data")
@@ -62,7 +63,8 @@ def download(verbose=False):
             already_downloaded.append(url)
         
             if verbose:
-                print(f"\nSuccessfully downloaded {yt.title}\n")
+                print(f"Successfully downloaded {yt.title}")
+                print("...")
 
 
         with open("urls.json", "w") as out:
@@ -73,7 +75,8 @@ def download(verbose=False):
             }, out, indent=4)
         
         if verbose:
-            print("\nList updated.\n")
+            print("List updated.")
+            print("...")
 
     print(f"\n{count}/{initial_urls_number} urls successfully downloaded.\n")
 
@@ -85,7 +88,7 @@ def download(verbose=False):
 
 def add_link(url):
     if not re.match(r'^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$', url):
-        print("This is not a valid URL, try again")
+        print("\nThis is not a valid URL, try again")
         return
 
     with open("urls.json", "r+") as file:
@@ -105,11 +108,34 @@ def add_link(url):
     print("\nLink added\n")
 
 
-if sys.argv[1] == "-add":
-    add_link(sys.argv[2])
+equals = f"{30 * '='}"
 
-elif len(sys.argv) == 1:
-    print("Please specify an argument.\n\n-d to download the current list\n\n-add [link]\n\n-v can be added with -d argument")
+if len(sys.argv) == 1:
+    print(equals)
+    print("    Please specify an argument")
+    print(equals)
+    print("\n-d to download the current list\n\n-add [link]\n\n-v can be added with -d argument\n")
+
+elif len(sys.argv) > 3:
+    print(equals)
+    print("    Too much arguments")
+    print(equals)
+    print("\n-d to download the current list\n\n-add [link]\n\n-v can be added with -d argument\n")
+
+elif len(sys.argv) > 1 and sys.argv[1] not in ["-d", "-add"]:
+    print(equals)
+    print("    Wrong argument. Please specify the correct one")
+    print(equals)
+    print("\n-d to download the current list\n\n-add [link]\n\n-v can be added with -d argument\n")
+
+elif len(sys.argv) == 2 and sys.argv[1] == "-add":
+    print(equals)
+    print("    You need to specify an url with the -add argument.\n")
+    print(equals)
+
+
+elif sys.argv[1] == "-add":
+    add_link(sys.argv[2])
 
 elif len(sys.argv) == 3 and sys.argv[1] == "-d" and sys.argv[2] == "-v":
     download(verbose=True)
