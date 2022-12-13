@@ -73,7 +73,7 @@ def download(verbose=False):
             }, out, indent=4)
         
         if verbose:
-            print("\nList updated\n")
+            print("\nList updated.\n")
 
     print(f"\n{count}/{initial_urls_number} urls successfully downloaded.\n")
 
