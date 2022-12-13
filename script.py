@@ -112,7 +112,7 @@ if sys.argv[1] == "-add":
 elif len(sys.argv) == 1:
     print("Please specify an argument.\n\n-d to download the current list\n\n-add [link]\n\n-v can be added with -d argument")
 
-elif sys.argv[1] == "-d" and sys.argv[2] == "-v":
+elif len(sys.argv) == 3 and sys.argv[1] == "-d" and sys.argv[2] == "-v":
     download(verbose=True)
 
 elif sys.argv[1] == "-d":
