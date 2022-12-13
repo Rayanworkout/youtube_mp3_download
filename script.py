@@ -6,7 +6,6 @@ import sys
 from pathlib import Path
 
 from pytube import YouTube
-from tqdm import tqdm
 
 
 if not os.path.isdir("data"):
@@ -36,7 +35,7 @@ def download(verbose=False):
     count = 0
     not_downloaded = []
     
-    while tqdm(to_download):
+    while to_download:
         for url in to_download:
             if url in already_downloaded:
                 print(f"{url} is already downloaded.\n")
