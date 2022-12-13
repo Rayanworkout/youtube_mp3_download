@@ -31,7 +31,7 @@ def download(verbose=False):
         exit()
     
     if verbose:
-        print(f"{initial_urls_number} urls to download.")
+        print(f"{initial_urls_number} URLS to download.")
 
     count = 0
     not_downloaded = []
@@ -78,17 +78,17 @@ def download(verbose=False):
             print("List updated.")
             print("...")
 
-    print(f"\n{count}/{initial_urls_number} urls successfully downloaded.\n")
+    print(f"\n{count}/{initial_urls_number} URLS successfully downloaded.\n")
 
     if not_downloaded:
         n = '\n'
-        print(f"{len(not_downloaded)} url(s) were not downloaded:\n{n.join(not_downloaded)}\n")
+        print(f"{len(not_downloaded)} URL(S) were not downloaded:\n{n.join(not_downloaded)}\n")
 
 
 
 def add_link(url):
     if not re.match(r'^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$', url):
-        print("This is not a valid youtube url, try again")
+        print("This is not a valid youtube URL, try again")
         return
 
     with open("urls.json", "r+") as file:
@@ -105,7 +105,7 @@ def add_link(url):
         json.dump(data, file, indent=4)
         file.truncate()
     
-    print("\nLink added\n")
+    print("Link added\n")
 
 
 equals = f"{40 * '='}"
@@ -130,7 +130,7 @@ elif len(sys.argv) > 1 and sys.argv[1] not in ["-d", "-add"]:
 
 elif len(sys.argv) == 2 and sys.argv[1] == "-add":
     print(equals)
-    print("    You need to specify an url with the -add argument.\n")
+    print("    You need to specify an URL with the -add argument.\n")
     print(equals)
 
 
