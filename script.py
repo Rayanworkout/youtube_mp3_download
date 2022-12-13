@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import sys
 
 from pathlib import Path
@@ -7,6 +8,9 @@ from pathlib import Path
 from pytube import YouTube
 from tqdm import tqdm
 
+
+if not os.path.isdir("data"):
+    os.mkdir("data")
 
 if not os.path.exists("urls.json"):
     with open("urls.json", "w") as file:
@@ -80,6 +84,10 @@ def download(verbose=False):
 
 
 def add_link(url):
+    if not re.match(r"^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$", url):
+        print("This is not a valid URL, try again")
+        return
+
     with open("urls.json", "r+") as file:
 
         data = json.load(file)
