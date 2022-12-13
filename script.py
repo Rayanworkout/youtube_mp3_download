@@ -88,7 +88,7 @@ def download(verbose=False):
 
 def add_link(url):
     if not re.match(r'^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$', url):
-        print("\nThis is not a valid URL, try again")
+        print("This is not a valid youtube url, try again")
         return
 
     with open("urls.json", "r+") as file:
@@ -96,7 +96,7 @@ def add_link(url):
         data = json.load(file)
         
         if url in data["to_download"]:
-            print("\nURL already in list\n")
+            print("URL already in list\n")
             return
         
         data["to_download"].append(url)
@@ -108,25 +108,25 @@ def add_link(url):
     print("\nLink added\n")
 
 
-equals = f"{30 * '='}"
+equals = f"{40 * '='}"
 
 if len(sys.argv) == 1:
     print(equals)
     print("    Please specify an argument")
     print(equals)
-    print("\n-d to download the current list\n\n-add [link]\n\n-v can be added with -d argument\n")
+    print("\n-d to download the current list\n\n-add [link] to add a new link to the list\n\n-v can be added with -d argument\n")
 
 elif len(sys.argv) > 3:
     print(equals)
     print("    Too much arguments")
     print(equals)
-    print("\n-d to download the current list\n\n-add [link]\n\n-v can be added with -d argument\n")
+    print("\n-d to download the current list\n\n-add [link] to add a new link to the list\n\n-v can be added with -d argument\n")
 
 elif len(sys.argv) > 1 and sys.argv[1] not in ["-d", "-add"]:
     print(equals)
     print("    Wrong argument. Please specify the correct one")
     print(equals)
-    print("\n-d to download the current list\n\n-add [link]\n\n-v can be added with -d argument\n")
+    print("\n-d to download the current list\n\n-add [link] to add a new link to the list\n\n-v can be added with -d argument\n")
 
 elif len(sys.argv) == 2 and sys.argv[1] == "-add":
     print(equals)
